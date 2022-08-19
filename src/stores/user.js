@@ -6,7 +6,7 @@ import { useDatabaseStore } from './database'
 
 export const useUserStore = defineStore("user", {
     state: () => ({
-        userData: "bluuweb@test.com",
+        userData: "",
         loadingUser: false,
         loadingSession: false,
     }),
@@ -41,6 +41,7 @@ export const useUserStore = defineStore("user", {
             }
         },
         async LoginUsuario(email, password) {
+            this.loadingSession = true;
             this.loadingUser = true;
             try {
                 const { user } = await signInWithEmailAndPassword(
@@ -49,13 +50,13 @@ export const useUserStore = defineStore("user", {
                     password
                 );
                 this.userData = { email: user.email, uid: user.uid };
-                console.log("log user.js-LoginUsuario: ", this.userData);
                 router.push("/");
             } catch (error) {
                 console.log(error);  
             }
             finally{
                 this.loadingUser = false;
+                this.loadingSession = false;
             }
         },
         async logoutUsuario() {
@@ -64,8 +65,7 @@ export const useUserStore = defineStore("user", {
             databaseStore.$reset();
              try {
                 await signOut(auth);
-                this.userData = null;
-
+                 this.userData = null;
                  router.push("/Login");
              } catch (error) {
                 console.log(error);

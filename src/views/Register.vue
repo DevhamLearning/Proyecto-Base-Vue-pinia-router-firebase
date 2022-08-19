@@ -1,6 +1,6 @@
 <template>
     <h1>Register</h1>
-    <button @click="userStore.registerUser('Ignacio Alvarado')">Acceder</button>
+    <!-- <button @click="userStore.registerUser('Ignacio Alvarado')">Acceder</button>-->
 
     <form @submit.prevent="handleSubmit">
         <input type="email" placeholder="ingrese Email" v-model="email">

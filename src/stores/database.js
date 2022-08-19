@@ -98,6 +98,7 @@ export const useDatabaseStore = defineStore("database", {
                 console.log(error.message);
             } finally {
                 this.loadingDoc = false;
+
             }
         },
         async updateUrl(id, name) {
